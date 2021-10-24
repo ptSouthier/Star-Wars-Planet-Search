@@ -27,13 +27,13 @@ function ValuesFilter() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFilters({
-      ...filters,
+    setFilters((previousState) => ({
+      ...previousState,
       filterByNumericValues: [
-        ...filters.filterByNumericValues,
+        ...previousState.filterByNumericValues,
         filterOptions,
       ],
-    });
+    }));
     setFilterOptions({
       column: '',
       comparison: 'maior que',
