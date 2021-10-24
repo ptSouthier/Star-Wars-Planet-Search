@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import planetsContext from '../context/planetsContext';
 import SearchInput from './SearchInput';
+import SortFilter from './SortFilter';
 import ValuesFilter from './ValuesFilter';
 
 // Para a implementação deste Componente e de suas lógicas, utilizei como referência o código do colega de Turma, Juan Pablo! PR: https://github.com/tryber/sd-010-a-project-starwars-planets-search/pull/128
@@ -30,8 +31,11 @@ function Table() {
       return '';
     });
     return filteredAPI.sort((a, b) => {
-      if (column === 'Name') {
+      if (column === 'Name' && sort === 'ASC') {
         return a[column.toLowerCase()].localeCompare(b[column.toLowerCase()]);
+      }
+      if (column === 'Name' && sort === 'DESC') {
+        return b[column.toLowerCase()].localeCompare(a[column.toLowerCase()]);
       }
       if (sort === 'ASC') {
         return a[column] - b[column];
@@ -61,6 +65,7 @@ function Table() {
   return (
     <div>
       <SearchInput />
+      <SortFilter />
       <ValuesFilter />
       <h1>API - Star Wars Planets</h1>
       <table>
